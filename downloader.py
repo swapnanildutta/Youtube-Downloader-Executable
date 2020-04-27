@@ -26,7 +26,7 @@ def Interface():
             messageVar = tk.Message(root, text = ourMessage) 
             messageVar.config(bg='yellow')
         messageVar.pack()
-        root.deletecommand(messageVar)
+        #root.deletecommand(messageVar)
         #e.update()
     
     menu = tk.Menu(root)
