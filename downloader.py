@@ -1,3 +1,4 @@
+from tkinter import filedialog
 from pytube import YouTube
 from PIL import Image
 import tkinter as tk
@@ -40,7 +41,7 @@ def downloader(event=None):
 def clearData():
     global dispFrame
     dispFrame.destroy()
-    currBG = root['bg']
+    currBG = menu['bg']
     dispFrame = tk.Frame(rootFrame, bg=currBG, width=380, height=255)
     dispFrame.grid(row=3, rowspan=12, column=0, columnspan=10, sticky='e')
     downloadBtn.config(text='Download Video', state='normal')
@@ -54,7 +55,13 @@ def clearData():
 
 
 def getVideo():
-    yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution')[-1].download()
+    global saveAs
+    ytTitle = yt.title
+    saveAs = filedialog.asksaveasfilename(initialfile=ytTitle, filetypes=[('mp4', '*.mp4')])
+    filename = saveAs.split('/')[-1]
+    i = saveAs.index(filename)
+    path = saveAs[:i]
+    yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution')[-1].download(output_path=path, filename=filename)
 
 
 def updateImg():
