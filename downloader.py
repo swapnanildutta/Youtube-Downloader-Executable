@@ -1,6 +1,6 @@
-from tkinter import filedialog
+from tkinter import filedialog, PhotoImage
 from pytube import YouTube
-from PIL import Image
+from PIL import Image, ImageTk
 import tkinter as tk
 import requests
 import io
@@ -128,11 +128,17 @@ def about(bgMode, txtMode):
     rootFrame.destroy()
     rootFrame = tk.Frame(root, bg=bgMode)
     rootFrame.pack(fill='both', expand=True)
+    logo = ImageTk.PhotoImage(Image.open('design\Youtube-Downloader-Executable-logo.png').resize((200, 200)))
+    logoholder = tk.Label(rootFrame ,image=logo, bg=bgMode, fg=txtMode)
+    logoholder.image = logo
+    logoholder.pack()
     title = tk.Label(rootFrame, text='YouTube Downloader', bg=bgMode, fg=txtMode, font=titleFont)
-    title.pack(pady=100)
+    title.pack(pady = 10)
     # If you want to add to this about page, copy the next 2 lines above and paste below and change the line1 to line2 etc.
     line1 = tk.Label(rootFrame, text='created by Swapnanil Dutta', bg=bgMode, fg=txtMode, font=textFont)
-    line1.pack()
+    line1.pack(pady=10)
+    line2 = tk.Label(rootFrame, text='Open-Source Project', bg=bgMode, fg=txtMode, font=textFont)
+    line2.pack()
 
 
 def main(bgMode, txtMode):
@@ -195,9 +201,11 @@ def main(bgMode, txtMode):
 
 # Setup root window
 root = tk.Tk()
+ico = PhotoImage(file = 'design\Youtube-Downloader-Executable.png')
 # Uncomment this next line if you want to remove the title bar. Then to close app use file menu to exit.
 ##root.attributes('-type', 'splash')
 root.title('YouTube Downloader')
+root.iconphoto(False, ico)
 root.geometry("740x400")
 rootFrame = tk.Frame(root)
 rootFrame.pack(fill='both', expand=True)
